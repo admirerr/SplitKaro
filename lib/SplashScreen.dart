@@ -3,7 +3,9 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:split_karo/DashBoard.dart';
+//import 'package:split_karo/DashBoard.dart';
+
+import 'login.dart';
 
 class SplashScreen extends StatefulWidget{
   @override
@@ -19,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(Duration(seconds: 2), () {
 
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => DashBoard() ));
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => MyLogin() ));
 
 
       //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => dashboard(),
