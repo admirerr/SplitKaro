@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:split_karo/profile_screen.dart';
 
+import 'DashBoard.dart';
+
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
 
@@ -117,7 +119,7 @@ class _MyLoginState extends State<MyLogin> {
                                       print(user);
 
                                       if(user != null){
-                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen()));
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => BottomNavBar()));
                                       }
                                     },
                                     icon: Icon(

@@ -44,6 +44,9 @@ dependencies:
   #curved nav bar
   curved_navigation_bar: ^1.0.3 #latest version
 
+  # Phone Number box
+  intl_phone_field: ^3.1.0
+
 
 dev_dependencies:
   flutter_test:
