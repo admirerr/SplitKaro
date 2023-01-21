@@ -1,6 +1,7 @@
 import 'dart:async';
 
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:split_karo/DashBoard.dart';
@@ -13,6 +14,13 @@ class SplashScreen extends StatefulWidget{
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+
+  //Initialize Firebase App
+  Future<FirebaseApp> _initializeFirebase() async {
+    FirebaseApp firebaseApp = await Firebase.initializeApp();
+    return firebaseApp;
+  }
 
 
   @override
@@ -35,14 +43,43 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.blue,
-        child: Center(child: Text('SplitKaro', style: TextStyle(
-            fontSize: 34,
-            fontWeight: FontWeight.w700,
-            color: Colors.white
-        ),),),
-      ),
+      body: FutureBuilder(
+        future: _initializeFirebase(),
+        builder: (context, snapshot){
+          if(snapshot.connectionState == ConnectionState.done){
+            return Container(
+              color: Colors.blue,
+              child: Center(child: Text('SplitKaro', style: TextStyle(
+                  fontSize: 34,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white
+              ),),),
+            );
+          }
+          return const Center(
+          child: CircularProgressIndicator(),
+          );
+        },
+      )
     );
   }
 }
+
+
+
+
+
+// @override
+// Widget build(BuildContext context) {
+//   return Scaffold(
+//     body: Container(
+//       color: Colors.blue,
+//       child: Center(child: Text('SplitKaro', style: TextStyle(
+//           fontSize: 34,
+//           fontWeight: FontWeight.w700,
+//           color: Colors.white
+//       ),),),
+//     ),
+//   );
+// }
+// }

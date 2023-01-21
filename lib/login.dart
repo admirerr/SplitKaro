@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:split_karo/profile_screen.dart';
 
 class MyLogin extends StatefulWidget {
   const MyLogin({Key? key}) : super(key: key);
@@ -8,8 +10,36 @@ class MyLogin extends StatefulWidget {
 }
 
 class _MyLoginState extends State<MyLogin> {
+
+  //Login function
+
+  static Future<User?> loginUsingEmailPassword({required String email, required String password, required BuildContext context}) async{
+  FirebaseAuth auth = FirebaseAuth.instance;
+  User? user;
+  try {
+    UserCredential userCredential = await auth.signInWithEmailAndPassword(email: email, password: password);
+    user = userCredential.user;
+  } on FirebaseAuthException catch (e){
+    if(e.code == "user-not-found"){
+      print("No User found for the email");
+  }
+  }
+   return user;
+
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
+
+    //Create the textfiled controller
+    TextEditingController _emailController = TextEditingController();
+    TextEditingController _passwordController = TextEditingController();
+
+
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -39,6 +69,7 @@ class _MyLoginState extends State<MyLogin> {
                       child: Column(
                         children: [
                           TextField(
+                            controller: _emailController,
                             style: TextStyle(color: Colors.black),
                             decoration: InputDecoration(
                                 fillColor: Colors.grey.shade100,
@@ -52,6 +83,7 @@ class _MyLoginState extends State<MyLogin> {
                             height: 30,
                           ),
                           TextField(
+                            controller: _passwordController,
                             style: TextStyle(),
                             obscureText: true,
                             decoration: InputDecoration(
@@ -75,10 +107,19 @@ class _MyLoginState extends State<MyLogin> {
                               ),
                               CircleAvatar(
                                 radius: 30,
-                                backgroundColor: Color(0xff4c505b),
+                                //backgroundColor: Color(0xff4c505b),
+                                backgroundColor: Colors.blue,
                                 child: IconButton(
                                     color: Colors.white,
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      //Let's test the app
+                                      User? user = await loginUsingEmailPassword(email: _emailController.text, password: _passwordController.text, context: context);
+                                      print(user);
+
+                                      if(user != null){
+                                        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => ProfileScreen()));
+                                      }
+                                    },
                                     icon: Icon(
                                       Icons.arrow_forward,
                                     )),
