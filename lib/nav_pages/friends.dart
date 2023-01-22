@@ -39,7 +39,7 @@ class _friendsPageState extends State<friendsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Color.fromARGB(255, 227, 227, 227),
+      //backgroundColor:  Color.fromARGB(255, 227, 227, 227),
       // body: Padding(
       //   padding: const EdgeInsets.only(bottom: 25),
       //   child: Align(
@@ -50,7 +50,7 @@ class _friendsPageState extends State<friendsPage> {
 
 
         body: Container(
-          color: Colors.blueAccent,
+          color: Colors.blue.withOpacity(.4),
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
