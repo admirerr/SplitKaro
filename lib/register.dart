@@ -292,6 +292,7 @@ class _MyRegisterState extends State<MyRegister> {
                             initialCountryCode: 'IN',
                             onChanged: (phone) {
                               print(phone.completeNumber);
+                              phoneNumberEditingController.text=phone.completeNumber;
                             },
                           ),
 
