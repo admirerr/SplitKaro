@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:split_karo/login.dart';
+
+import 'model/user_model.dart';
 
 void main() => runApp(MaterialApp(home: BottomNavBar()));
 
@@ -9,6 +14,27 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
+
+
+  User? user = FirebaseAuth.instance.currentUser;
+  UserModel loggedInUser = UserModel();
+
+  @override
+  void initState() {
+    super.initState();
+    FirebaseFirestore.instance
+        .collection("users")
+        .doc(user!.uid)
+        .get()
+        .then((value) {
+      this.loggedInUser = UserModel.fromMap(value.data());
+      setState(() {});
+    });
+  }
+
+
+
+
   int _page = 0;
   GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
 
@@ -46,16 +72,50 @@ class _BottomNavBarState extends State<BottomNavBar> {
               children: <Widget>[
                 Text(_page.toString(), textScaleFactor: 10.0),
                 ElevatedButton(
-                  child: Text('Go To Page of index 1'),
+                  child: Text('Welcome ${loggedInUser.name}'),
                   onPressed: () {
-                    final CurvedNavigationBarState? navBarState =
-                        _bottomNavigationKey.currentState;
-                    navBarState?.setPage(1);
+
+                    // final CurvedNavigationBarState? navBarState =
+                    //     _bottomNavigationKey.currentState;
+                    // navBarState?.setPage(1);
+
+
+                  },
+                ),
+
+
+
+                //Text(_page.toString(), textScaleFactor: 10.0),
+                ElevatedButton(
+                  child: Text('Logout'),
+                  onPressed: () {
+
+                    logout(context);
+
+
                   },
                 )
+
+
               ],
+
+
+
+
+
+
+
+
             ),
           ),
         ));
   }
+
+  // the logout function
+  Future<void> logout(BuildContext context) async {
+    await FirebaseAuth.instance.signOut();
+    Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => MyLogin()));
+  }
+
 }
