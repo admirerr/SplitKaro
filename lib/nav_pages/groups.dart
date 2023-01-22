@@ -40,7 +40,7 @@ class _groupsPageState extends State<groupsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:  Color.fromARGB(255, 227, 227, 227),
+      //backgroundColor:  Color.fromARGB(255, 227, 227, 227),
 
 
 
@@ -54,7 +54,7 @@ class _groupsPageState extends State<groupsPage> {
 
 
       body: Container(
-        color: Colors.blueAccent,
+        color: Colors.blue.withOpacity(.4),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
