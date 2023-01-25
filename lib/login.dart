@@ -6,7 +6,7 @@ import 'package:split_karo/profile_screen.dart';
 import 'DashBoard.dart';
 
 
-void main() => runApp(MaterialApp(home: MyLogin()));
+void main() => runApp (MaterialApp(home: MyLogin()));
 
 
 class MyLogin extends StatefulWidget {
