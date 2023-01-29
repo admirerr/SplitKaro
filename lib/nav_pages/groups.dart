@@ -40,7 +40,7 @@ class _groupsPageState extends State<groupsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var arrNames= ['Group','Group','Group','Group','Group','Group','Group','Group'];
+    var arrNames = ['Group','Group','Group','Group','Group','Group','Group','Group'];
     return Scaffold(
       body: Container(
         color: Colors.blue.withOpacity(.4),
@@ -52,40 +52,34 @@ class _groupsPageState extends State<groupsPage> {
               ElevatedButton(
                 child: Text('Welcome ${loggedInUser.name}'),
                 onPressed: () {
-                  // final CurvedNavigationBarState? navBarState =
-                  //     _bottomNavigationKey.currentState;
-                  // navBarState?.setPage(1);
-
-
+                  // Handle button press here
                 },
               ),
-
-
-              //Text(_page.toString(), textScaleFactor: 10.0),
               ElevatedButton(
                 child: Text('Logout'),
                 onPressed: () {
                   logout(context);
                 },
               ),
-
-              ListView.separated(shrinkWrap: true,itemBuilder: (context, index){
-                return Row(
-                  children: [
-                  Text(arrNames[index], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),)
-                  ],
-                );
-
-              },
-                itemCount: arrNames.length,
-                separatorBuilder: (context, index){
-                return Divider(height: 100, thickness: 4,);
-                },
-
-
-              )
+              Expanded(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index){
+                    return Row(
+                      children: [
+                        Expanded(
+                            child: Text(arrNames[index], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),)
+                        )
+                      ],
+                    );
+                  },
+                  itemCount: arrNames.length,
+                  separatorBuilder: (context, index){
+                    return Divider(height: 100, thickness: 4,);
+                  },
+                ),
+              ),
             ],
-
           ),
         ),
       ),
