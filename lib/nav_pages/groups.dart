@@ -65,17 +65,16 @@ class _groupsPageState extends State<groupsPage> {
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index){
-                    return Row(
-                      children: [
-                        Expanded(
-                            child: Text(arrNames[index], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),)
-                        )
-                      ],
+                    return ListTile(
+                      leading: Text('${index+1}'),
+                      title: Text(arrNames[index]),
+                      subtitle: Text('Status'),
+                      trailing: Icon(Icons.double_arrow),
                     );
                   },
                   itemCount: arrNames.length,
                   separatorBuilder: (context, index){
-                    return Divider(height: 100, thickness: 4,);
+                    return Divider(height: 20, thickness: 4,);
                   },
                 ),
               ),
