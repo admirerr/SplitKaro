@@ -8,6 +8,7 @@ import '../model/user_model.dart';
 class groupsPage extends StatefulWidget {
   const groupsPage({Key? key}) : super(key: key);
 
+
   @override
   State<groupsPage> createState() => _groupsPageState();
 }
@@ -39,20 +40,8 @@ class _groupsPageState extends State<groupsPage> {
 
   @override
   Widget build(BuildContext context) {
+    var arrNames = ['Group','Group','Group','Group','Group','Group','Group','Group'];
     return Scaffold(
-      //backgroundColor:  Color.fromARGB(255, 227, 227, 227),
-
-
-
-      // body: Padding(
-      //   padding: const EdgeInsets.only(bottom: 25),
-      //   child: Align(
-      //     alignment: Alignment.bottomCenter,
-      //     child: Text('Groups Page', style: TextStyle(fontSize: 30)),
-      //   ),
-      // ),
-
-
       body: Container(
         color: Colors.blue.withOpacity(.4),
         child: Center(
@@ -63,51 +52,43 @@ class _groupsPageState extends State<groupsPage> {
               ElevatedButton(
                 child: Text('Welcome ${loggedInUser.name}'),
                 onPressed: () {
-
-                  // final CurvedNavigationBarState? navBarState =
-                  //     _bottomNavigationKey.currentState;
-                  // navBarState?.setPage(1);
-
-
+                  // Handle button press here
                 },
               ),
-
-
-
-              //Text(_page.toString(), textScaleFactor: 10.0),
               ElevatedButton(
                 child: Text('Logout'),
                 onPressed: () {
-
                   logout(context);
-
-
                 },
-              )
-
-
+              ),
+              Expanded(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index){
+                    return Row(
+                      children: [
+                        Expanded(
+                            child: Text(arrNames[index], style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),)
+                        )
+                      ],
+                    );
+                  },
+                  itemCount: arrNames.length,
+                  separatorBuilder: (context, index){
+                    return Divider(height: 100, thickness: 4,);
+                  },
+                ),
+              ),
             ],
-
-
-
-
-
-
-
-
           ),
         ),
-      )
-
-
-
-
+      ),
     );
   }
 
 
 
-  // the logout function
+    // the logout function
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
