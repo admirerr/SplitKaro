@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import '../login.dart';
 import '../model/user_model.dart';
 
@@ -37,7 +37,6 @@ class _groupsPageState extends State<groupsPage> {
 
 
 
-
   @override
   Widget build(BuildContext context) {
     var arrNames = ['Group','Group','Group','Group','Group','Group','Group','Group'];
@@ -49,14 +48,27 @@ class _groupsPageState extends State<groupsPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              AppBar(title: Text("Groups", textScaleFactor: 2.0, style: TextStyle(color: Colors.indigo),), backgroundColor: Colors.white, centerTitle: true,),
+              AppBar(
+                title: Text("Groups", textScaleFactor: 1.5, style: TextStyle(color: Colors.black ,fontWeight: FontWeight.w500),),
+                backgroundColor: Colors.white70, centerTitle: true,
+                actions: <Widget>
+                [
+                  new IconButton(
+                    onPressed:()
+                    {
+
+                    },
+                      icon: Icon(Icons.add_circle_sharp, size: 35, color: Colors.blueAccent,),
+                  ),
+                ],
+                ),
               Expanded(
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index){
                     return ListTile(
-                      leading: Icon(Icons.account_circle),
-                      title: Text(arrNames[index],style: TextStyle(fontSize: 20 ,fontStyle: FontStyle.italic ,fontWeight: FontWeight.w500, color: Colors.teal),),
+                      leading: Icon(Icons.account_circle, size: 60, color: Colors.black54,),
+                      title: Text(arrNames[index],style: TextStyle(fontSize: 22 ,fontStyle: FontStyle.italic ,fontWeight: FontWeight.w500, color: Colors.teal),),
                       subtitle: Text('Status',textScaleFactor: 1.5),
                       trailing: Icon(Icons.double_arrow),
                     );
