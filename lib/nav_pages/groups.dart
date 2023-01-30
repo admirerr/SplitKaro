@@ -43,32 +43,21 @@ class _groupsPageState extends State<groupsPage> {
     var arrNames = ['Group','Group','Group','Group','Group','Group','Group','Group'];
     return Scaffold(
       body: Container(
+
         color: Colors.blue.withOpacity(.4),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Groups Page", textScaleFactor: 3.0),
-              ElevatedButton(
-                child: Text('Welcome ${loggedInUser.name}'),
-                onPressed: () {
-                  // Handle button press here
-                },
-              ),
-              ElevatedButton(
-                child: Text('Logout'),
-                onPressed: () {
-                  logout(context);
-                },
-              ),
+              AppBar(title: Text("Groups", textScaleFactor: 2.0, style: TextStyle(color: Colors.indigo),), backgroundColor: Colors.white, centerTitle: true,),
               Expanded(
                 child: ListView.separated(
                   shrinkWrap: true,
                   itemBuilder: (context, index){
                     return ListTile(
-                      leading: Text('${index+1}'),
-                      title: Text(arrNames[index]),
-                      subtitle: Text('Status'),
+                      leading: Icon(Icons.account_circle),
+                      title: Text(arrNames[index],style: TextStyle(fontSize: 20 ,fontStyle: FontStyle.italic ,fontWeight: FontWeight.w500, color: Colors.teal),),
+                      subtitle: Text('Status',textScaleFactor: 1.5),
                       trailing: Icon(Icons.double_arrow),
                     );
                   },
