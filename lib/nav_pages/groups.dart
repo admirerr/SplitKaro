@@ -49,7 +49,7 @@ class _groupsPageState extends State<groupsPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               AppBar(
-                title: Text("Groups", textScaleFactor: 1.5, style: TextStyle(color: Colors.black ,fontWeight: FontWeight.w500),),
+                title: Text("Groups", textScaleFactor: 1.5, style: TextStyle(fontFamily: 'Dosis' ,color: Colors.black ,fontWeight: FontWeight.w500),),
                 backgroundColor: Colors.white70, centerTitle: true,
                 actions: <Widget>
                 [
