@@ -16,10 +16,19 @@ class _groupsPageState extends State<groupsPage> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
   TextEditingController _groupNameController = TextEditingController();
+  List<String> groupNames = []; // new list to store group names
 
   @override
   void initState() {
     super.initState();
+    // Fetch the group names from Firebase and store them in groupNames list
+    FirebaseFirestore.instance.collection("groups").get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        groupNames.add(doc.get("name"));
+      });
+      setState(() {});
+    });
+
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
@@ -38,7 +47,6 @@ class _groupsPageState extends State<groupsPage> {
 
   @override
   Widget build(BuildContext context) {
-    var arrNames = [      'Group1',      'Group',      'Group',      'Group',      'Group',      'Group',      'Group',      'Group'    ];
     return Scaffold(
       body: Container(
         color: Colors.blue.withOpacity(.4),
@@ -112,7 +120,7 @@ class _groupsPageState extends State<groupsPage> {
                         color: Colors.black54,
                       ),
                       title: Text(
-                        arrNames[index],
+                        groupNames[index],
                         style: TextStyle(
                             fontSize: 22,
                             fontStyle: FontStyle.italic,
@@ -123,7 +131,7 @@ class _groupsPageState extends State<groupsPage> {
                       trailing: Icon(Icons.double_arrow),
                     );
                   },
-                  itemCount: arrNames.length,
+                  itemCount: groupNames.length,
                   separatorBuilder: (context, index) {
                     return Divider(
                       height: 20,
