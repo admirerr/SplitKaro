@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import '../login.dart';
 import '../model/user_model.dart';
 
@@ -13,17 +13,22 @@ class groupsPage extends StatefulWidget {
 }
 
 class _groupsPageState extends State<groupsPage> {
-
-
-
-
-
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
+  TextEditingController _groupNameController = TextEditingController();
+  List<String> groupNames = []; // new list to store group names
 
   @override
   void initState() {
     super.initState();
+    // Fetch the group names from Firebase and store them in groupNames list
+    FirebaseFirestore.instance.collection("groups").get().then((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+        groupNames.add(doc.get("name"));
+      });
+      setState(() {});
+    });
+
     FirebaseFirestore.instance
         .collection("users")
         .doc(user!.uid)
@@ -34,78 +39,135 @@ class _groupsPageState extends State<groupsPage> {
     });
   }
 
-
-
+  @override
+  void dispose() {
+    _groupNameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final _groupsStream = FirebaseFirestore.instance.collection("groups").snapshots();
     return Scaffold(
-      //backgroundColor:  Color.fromARGB(255, 227, 227, 227),
-
-
-
-      // body: Padding(
-      //   padding: const EdgeInsets.only(bottom: 25),
-      //   child: Align(
-      //     alignment: Alignment.bottomCenter,
-      //     child: Text('Groups Page', style: TextStyle(fontSize: 30)),
-      //   ),
-      // ),
-
-
       body: Container(
         color: Colors.blue.withOpacity(.4),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Groups Page", textScaleFactor: 3.0),
-              ElevatedButton(
-                child: Text('Welcome ${loggedInUser.name}'),
-                onPressed: () {
+              AppBar(
+                title: Text(
+                  "Groups",
+                  textScaleFactor: 1.5,
+                  style: TextStyle(
+                      fontFamily: 'Dosis',
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500),
+                ),
+                backgroundColor: Colors.white70,
+                centerTitle: true,
+                actions: <Widget>[
+                  IconButton(
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: Text('New Group'),
+                          content: TextField(
+                            controller: _groupNameController,
+                            decoration: InputDecoration(
+                              hintText: 'Enter group name',
+                            ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
 
-                  // final CurvedNavigationBarState? navBarState =
-                  //     _bottomNavigationKey.currentState;
-                  // navBarState?.setPage(1);
 
-
-                },
+                              },
+                              child: Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                FirebaseFirestore.instance
+                                    .collection("groups")
+                                    .add({
+                                  "name": _groupNameController.text.trim(),
+                                  "owner": user!.uid,
+                                });
+                                Navigator.of(context).pop();
+                                _groupNameController.clear();
+                              },
+                              child: Text('Create'),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    icon: Icon(
+                      Icons.add_circle_sharp,
+                      size: 35,
+                      color: Colors.blueAccent,
+                    ),
+                  ),
+                ],
               ),
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: _groupsStream,
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong');
+                    }
 
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
 
+                    final groups = snapshot.data!.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+                    final groupNames = groups.map((group) => group['name']).toList();
 
-              //Text(_page.toString(), textScaleFactor: 10.0),
-              ElevatedButton(
-                child: Text('Logout'),
-                onPressed: () {
-
-                  logout(context);
-
-
-                },
-              )
-
-
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(
+                            Icons.account_circle,
+                            size: 60,
+                            color: Colors.black54,
+                          ),
+                          title: Text(
+                            groupNames[index],
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.teal),
+                          ),
+                          subtitle: Text('Status', textScaleFactor: 1.5),
+                          trailing: Icon(Icons.double_arrow),
+                        );
+                      },
+                      itemCount: groupNames.length,
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          height: 20,
+                          thickness: 4,
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
             ],
-
-
-
-
-
-
-
-
           ),
         ),
-      )
-
-
-
-
+      ),
     );
   }
-
-
 
   // the logout function
   Future<void> logout(BuildContext context) async {
@@ -113,6 +175,4 @@ class _groupsPageState extends State<groupsPage> {
     Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => MyLogin()));
   }
-
-
 }

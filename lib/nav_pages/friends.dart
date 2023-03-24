@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
 import '../login.dart';
 import '../model/user_model.dart';
 
@@ -35,6 +36,9 @@ class _friendsPageState extends State<friendsPage> {
       setState(() {});
     });
   }
+
+
+  
 
 
 
@@ -101,6 +105,8 @@ class _friendsPageState extends State<friendsPage> {
                   //     onChanged: (value) {},
                   //   ),
                   // ),
+
+
 
 
 
