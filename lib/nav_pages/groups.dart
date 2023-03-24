@@ -15,6 +15,7 @@ class groupsPage extends StatefulWidget {
 class _groupsPageState extends State<groupsPage> {
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
+  TextEditingController _groupNameController = TextEditingController();
 
   @override
   void initState() {
@@ -30,17 +31,14 @@ class _groupsPageState extends State<groupsPage> {
   }
 
   @override
+  void dispose() {
+    _groupNameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var arrNames = [
-      'Group',
-      'Group',
-      'Group',
-      'Group',
-      'Group',
-      'Group',
-      'Group',
-      'Group'
-    ];
+    var arrNames = [      'Group1',      'Group',      'Group',      'Group',      'Group',      'Group',      'Group',      'Group'    ];
     return Scaffold(
       body: Container(
         color: Colors.blue.withOpacity(.4),
@@ -64,30 +62,35 @@ class _groupsPageState extends State<groupsPage> {
                     onPressed: () {
                       showDialog(
                         context: context,
-                        builder: (context) =>
-                            AlertDialog(
-                              title: Text('New Group'),
-                              content: TextField(
-                                decoration: InputDecoration(
-                                  hintText: 'Enter group name',
-                                ),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('Cancel'),
-                                ),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    // TODO: add new group to Firestore
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('Create'),
-                                ),
-                              ],
+                        builder: (context) => AlertDialog(
+                          title: Text('New Group'),
+                          content: TextField(
+                            controller: _groupNameController,
+                            decoration: InputDecoration(
+                              hintText: 'Enter group name',
                             ),
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                FirebaseFirestore.instance
+                                    .collection("groups")
+                                    .add({
+                                  "name": _groupNameController.text.trim(),
+                                  "owner": user!.uid,
+                                });
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Create'),
+                            ),
+                          ],
+                        ),
                       );
                     },
                     icon: Icon(
