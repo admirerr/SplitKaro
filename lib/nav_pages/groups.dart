@@ -47,6 +47,7 @@ class _groupsPageState extends State<groupsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final _groupsStream = FirebaseFirestore.instance.collection("groups").snapshots();
     return Scaffold(
       body: Container(
         color: Colors.blue.withOpacity(.4),
@@ -82,6 +83,8 @@ class _groupsPageState extends State<groupsPage> {
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
+
+
                               },
                               child: Text('Cancel'),
                             ),
@@ -94,6 +97,7 @@ class _groupsPageState extends State<groupsPage> {
                                   "owner": user!.uid,
                                 });
                                 Navigator.of(context).pop();
+                                _groupNameController.clear();
                               },
                               child: Text('Create'),
                             ),
@@ -110,32 +114,50 @@ class _groupsPageState extends State<groupsPage> {
                 ],
               ),
               Expanded(
-                child: ListView.separated(
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      leading: Icon(
-                        Icons.account_circle,
-                        size: 60,
-                        color: Colors.black54,
-                      ),
-                      title: Text(
-                        groupNames[index],
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontStyle: FontStyle.italic,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.teal),
-                      ),
-                      subtitle: Text('Status', textScaleFactor: 1.5),
-                      trailing: Icon(Icons.double_arrow),
-                    );
-                  },
-                  itemCount: groupNames.length,
-                  separatorBuilder: (context, index) {
-                    return Divider(
-                      height: 20,
-                      thickness: 4,
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: _groupsStream,
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      return Text('Something went wrong');
+                    }
+
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+
+                    final groups = snapshot.data!.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+                    final groupNames = groups.map((group) => group['name']).toList();
+
+                    return ListView.separated(
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: Icon(
+                            Icons.account_circle,
+                            size: 60,
+                            color: Colors.black54,
+                          ),
+                          title: Text(
+                            groupNames[index],
+                            style: TextStyle(
+                                fontSize: 22,
+                                fontStyle: FontStyle.italic,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.teal),
+                          ),
+                          subtitle: Text('Status', textScaleFactor: 1.5),
+                          trailing: Icon(Icons.double_arrow),
+                        );
+                      },
+                      itemCount: groupNames.length,
+                      separatorBuilder: (context, index) {
+                        return Divider(
+                          height: 20,
+                          thickness: 4,
+                        );
+                      },
                     );
                   },
                 ),
