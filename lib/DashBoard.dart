@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:split_karo/login.dart';
 import 'package:split_karo/nav_pages/account.dart';
-import 'package:split_karo/nav_pages/activity.dart';
+import 'package:split_karo/nav_pages/activity2.dart';
 import 'package:split_karo/nav_pages/friends.dart';
 import 'package:split_karo/nav_pages/groups.dart';
 

@@ -17,8 +17,6 @@ class friendsPage extends StatefulWidget {
 
 class _friendsPageState extends State<friendsPage> {
 
-
-
   User? user = FirebaseAuth.instance.currentUser;
   UserModel loggedInUser = UserModel();
 
@@ -65,157 +63,286 @@ class _friendsPageState extends State<friendsPage> {
           padding: const EdgeInsets.all(10),
           child: ListView(
             children: [
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend1'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend2'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend3'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend4'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend5'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend6'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend7'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend8'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend9'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend10'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend11'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend12'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend13'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend14'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend15'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+              Card(
+                child: ListTile(
+                  leading: FlutterLogo(),
+                  title: Text('Friend16'),
+                  trailing: Icon(Icons.more_vert),
+                ),
+              ),
+
+
+
+
+
+
+
+
+
+
+
+
+
               // user card
               // SimpleUserCard(
               //   userName: "${loggedInUser.name}",
               //   userProfilePic: AssetImage("assets/prof_picb.jpg"),
               // ),
-              SettingsGroup(
-                items: [
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.fingerprint,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: Colors.red,
-                    ),
-                    title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
-                  ),
-                  // SettingsItem(
-                  //   onTap: () {},
-                  //   icons: Icons.dark_mode_rounded,
-                  //   iconStyle: IconStyle(
-                  //     iconsColor: Colors.white,
-                  //     withBackground: true,
-                  //     backgroundColor: Colors.red,
-                  //   ),
-                  //   title: 'Dark mode',
-                  //   subtitle: "Automatic",
-                  //   trailing: Switch.adaptive(
-                  //     value: false,
-                  //     onChanged: (value) {},
-                  //   ),
-                  // ),
 
 
-
-
-
-
-
-
-
-
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.fingerprint,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: Colors.red,
-                    ),
-                    title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
-                  ),
-
-
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.fingerprint,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: Colors.red,
-                    ),
-                    title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
-                  ),
-
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.fingerprint,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: Colors.red,
-                    ),
-                    title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
-                  ),
-
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.fingerprint,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: Colors.red,
-                    ),
-                    title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
-                  ),
-
-
-                  SettingsItem(
-                    onTap: () {},
-                    icons: CupertinoIcons.pencil_outline,
-                    iconStyle: IconStyle(),
-                    title: 'Appearance',
-                    subtitle: "Make Ziar'App yours",
-                  ),
-                  SettingsItem(
-                    onTap: () {},
-                    icons: Icons.fingerprint,
-                    iconStyle: IconStyle(
-                      iconsColor: Colors.white,
-                      withBackground: true,
-                      backgroundColor: Colors.red,
-                    ),
-                    title: 'Privacy',
-                    subtitle: "Lock Ziar'App to improve your privacy",
-                  ),
-
-
-
-                ],
-              ),
+              // SettingsGroup(
+              //   items: [
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: CupertinoIcons.pencil_outline,
+              //       title: 'Friend1',
+              //       iconStyle: IconStyle(),
+              //       // title: 'Friend1',
+              //
+              //       //subtitle: "Make Ziar'App yours",
+              //     ),
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: Icons.fingerprint,
+              //       iconStyle: IconStyle(
+              //         iconsColor: Colors.white,
+              //         withBackground: true,
+              //         backgroundColor: Colors.red,
+              //       ),
+              //       title: 'Friend2',
+              //       //subtitle: "Lock Ziar'App to improve your privacy",
+              //     ),
+              //     // SettingsItem(
+              //     //   onTap: () {},
+              //     //   icons: Icons.dark_mode_rounded,
+              //     //   iconStyle: IconStyle(
+              //     //     iconsColor: Colors.white,
+              //     //     withBackground: true,
+              //     //     backgroundColor: Colors.red,
+              //     //   ),
+              //     //   title: 'Dark mode',
+              //     //   subtitle: "Automatic",
+              //     //   trailing: Switch.adaptive(
+              //     //     value: false,
+              //     //     onChanged: (value) {},
+              //     //   ),
+              //     // ),
+              //
+              //
+              //
+              //
+              //
+              //
+              //
+              //
+              //
+              //
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: CupertinoIcons.pencil_outline,
+              //       iconStyle: IconStyle(),
+              //       title: 'Friend3',
+              //       //subtitle: "Make Ziar'App yours",
+              //     ),
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: Icons.fingerprint,
+              //       iconStyle: IconStyle(
+              //         iconsColor: Colors.white,
+              //         withBackground: true,
+              //         backgroundColor: Colors.red,
+              //       ),
+              //       title: 'Friend4',
+              //       //subtitle: "Lock Ziar'App to improve your privacy",
+              //     ),
+              //
+              //
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: CupertinoIcons.pencil_outline,
+              //       iconStyle: IconStyle(),
+              //       title: 'Friend5',
+              //       //subtitle: "Make Ziar'App yours",
+              //     ),
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: Icons.fingerprint,
+              //       iconStyle: IconStyle(
+              //         iconsColor: Colors.white,
+              //         withBackground: true,
+              //         backgroundColor: Colors.red,
+              //       ),
+              //       title: 'Friend6',
+              //       //subtitle: "Lock Ziar'App to improve your privacy",
+              //     ),
+              //
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: CupertinoIcons.pencil_outline,
+              //       iconStyle: IconStyle(),
+              //       title: 'Friend7',
+              //       //subtitle: "Make Ziar'App yours",
+              //     ),
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: Icons.fingerprint,
+              //       iconStyle: IconStyle(
+              //         iconsColor: Colors.white,
+              //         withBackground: true,
+              //         backgroundColor: Colors.red,
+              //       ),
+              //       title: 'Friend8',
+              //       //subtitle: "Lock Ziar'App to improve your privacy",
+              //     ),
+              //
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: CupertinoIcons.pencil_outline,
+              //       iconStyle: IconStyle(),
+              //       title: 'Friend8',
+              //       //subtitle: "Make Ziar'App yours",
+              //     ),
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: Icons.fingerprint,
+              //       iconStyle: IconStyle(
+              //         iconsColor: Colors.white,
+              //         withBackground: true,
+              //         backgroundColor: Colors.red,
+              //       ),
+              //       title: 'Friend9',
+              //       //subtitle: "Lock Ziar'App to improve your privacy",
+              //     ),
+              //
+              //
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: CupertinoIcons.pencil_outline,
+              //       iconStyle: IconStyle(),
+              //       title: 'Friend10',
+              //       //subtitle: "Make Ziar'App yours",
+              //     ),
+              //     SettingsItem(
+              //       onTap: () {},
+              //       icons: Icons.fingerprint,
+              //       iconStyle: IconStyle(
+              //         iconsColor: Colors.white,
+              //         withBackground: true,
+              //         backgroundColor: Colors.red,
+              //       ),
+              //       title: 'Friend11',
+              //       //subtitle: "Lock Ziar'App to improve your privacy",
+              //     ),
+              //
+              //
+              //
+              //   ],
+              // ),
               // SettingsGroup(
               //   items: [
               //     SettingsItem(
@@ -254,8 +381,8 @@ class _friendsPageState extends State<friendsPage> {
               //         fontWeight: FontWeight.bold,
               //       ),
               //     ),
-              //   ],
-              // ),
+              //    ],
+              //  ),
             ],
           ),
         ),
