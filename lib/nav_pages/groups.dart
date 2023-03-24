@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import '../login.dart';
 import '../model/user_model.dart';
 
 class groupsPage extends StatefulWidget {
   const groupsPage({Key? key}) : super(key: key);
+
 
   @override
   State<groupsPage> createState() => _groupsPageState();
@@ -36,78 +37,58 @@ class _groupsPageState extends State<groupsPage> {
 
 
 
-
   @override
   Widget build(BuildContext context) {
+    var arrNames = ['Group','Group','Group','Group','Group','Group','Group','Group'];
     return Scaffold(
-      //backgroundColor:  Color.fromARGB(255, 227, 227, 227),
-
-
-
-      // body: Padding(
-      //   padding: const EdgeInsets.only(bottom: 25),
-      //   child: Align(
-      //     alignment: Alignment.bottomCenter,
-      //     child: Text('Groups Page', style: TextStyle(fontSize: 30)),
-      //   ),
-      // ),
-
-
       body: Container(
+
         color: Colors.blue.withOpacity(.4),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Text("Groups Page", textScaleFactor: 3.0),
-              ElevatedButton(
-                child: Text('Welcome ${loggedInUser.name}'),
-                onPressed: () {
+              AppBar(
+                title: Text("Groups", textScaleFactor: 1.5, style: TextStyle(fontFamily: 'Dosis' ,color: Colors.black ,fontWeight: FontWeight.w500),),
+                backgroundColor: Colors.white70, centerTitle: true,
+                actions: <Widget>
+                [
+                  new IconButton(
+                    onPressed:()
+                    {
 
-                  // final CurvedNavigationBarState? navBarState =
-                  //     _bottomNavigationKey.currentState;
-                  // navBarState?.setPage(1);
-
-
-                },
+                    },
+                      icon: Icon(Icons.add_circle_sharp, size: 35, color: Colors.blueAccent,),
+                  ),
+                ],
+                ),
+              Expanded(
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  itemBuilder: (context, index){
+                    return ListTile(
+                      leading: Icon(Icons.account_circle, size: 60, color: Colors.black54,),
+                      title: Text(arrNames[index],style: TextStyle(fontSize: 22 ,fontStyle: FontStyle.italic ,fontWeight: FontWeight.w500, color: Colors.teal),),
+                      subtitle: Text('Status',textScaleFactor: 1.5),
+                      trailing: Icon(Icons.double_arrow),
+                    );
+                  },
+                  itemCount: arrNames.length,
+                  separatorBuilder: (context, index){
+                    return Divider(height: 20, thickness: 4,);
+                  },
+                ),
               ),
-
-
-
-              //Text(_page.toString(), textScaleFactor: 10.0),
-              ElevatedButton(
-                child: Text('Logout'),
-                onPressed: () {
-
-                  logout(context);
-
-
-                },
-              )
-
-
             ],
-
-
-
-
-
-
-
-
           ),
         ),
-      )
-
-
-
-
+      ),
     );
   }
 
 
 
-  // the logout function
+    // the logout function
   Future<void> logout(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
