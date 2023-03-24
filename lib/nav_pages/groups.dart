@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import '../login.dart';
 import '../model/user_model.dart';
+import 'group_details_page.dart';
 
 class groupsPage extends StatefulWidget {
   const groupsPage({Key? key}) : super(key: key);
@@ -133,22 +134,32 @@ class _groupsPageState extends State<groupsPage> {
                     return ListView.separated(
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          leading: Icon(
-                            Icons.account_circle,
-                            size: 60,
-                            color: Colors.black54,
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => GroupDetailsPage(groupName: groupNames[index]),
+                              ),
+                            );
+                          },
+                          child: ListTile(
+                            leading: Icon(
+                              Icons.account_circle,
+                              size: 60,
+                              color: Colors.black54,
+                            ),
+                            title: Text(
+                              groupNames[index],
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.teal),
+                            ),
+                            subtitle: Text('Status', textScaleFactor: 1.5),
+                            trailing: Icon(Icons.double_arrow),
                           ),
-                          title: Text(
-                            groupNames[index],
-                            style: TextStyle(
-                                fontSize: 22,
-                                fontStyle: FontStyle.italic,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.teal),
-                          ),
-                          subtitle: Text('Status', textScaleFactor: 1.5),
-                          trailing: Icon(Icons.double_arrow),
                         );
                       },
                       itemCount: groupNames.length,
@@ -159,6 +170,7 @@ class _groupsPageState extends State<groupsPage> {
                         );
                       },
                     );
+
                   },
                 ),
               ),
@@ -167,12 +179,5 @@ class _groupsPageState extends State<groupsPage> {
         ),
       ),
     );
-  }
-
-  // the logout function
-  Future<void> logout(BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MyLogin()));
   }
 }
